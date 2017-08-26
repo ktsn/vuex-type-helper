@@ -34,8 +34,8 @@ interface ActionContext<State, Getters, Actions, Mutations> extends BaseActionCo
   commit: Commit<Mutations>
 }
 
-export type DefineGetters<Getters, State> = {
-  [K in keyof Getters]: (state: State, getters: Getters, rootState: any, rootGetters: any) => Getters[K]
+export type DefineGetters<Getters, State, ExtraGetters = {}> = {
+  [K in keyof Getters]: (state: State, getters: Getters & ExtraGetters, rootState: any, rootGetters: any) => Getters[K]
 }
 
 export type DefineActions<Actions, State, Getters, Mutations, ExtraActions = {}> = {
