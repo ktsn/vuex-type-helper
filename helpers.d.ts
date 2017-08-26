@@ -14,7 +14,7 @@ declare module 'vuex/types/helpers' {
   }
 
   interface ComputedStateMapper<State, Getters> {
-    <T>(map: Accessor<T, State, Getters>): { [K in keyof T]: T[K] }
+    <T>(map: Accessor<T, State, Getters>): { [K in keyof T]: () => T[K] }
   }
 
   interface MethodsMapper<T, R> {
