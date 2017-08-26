@@ -1,0 +1,22 @@
+{
+  "name": "type-level-vuex",
+  "version": "1.0.0",
+  "description": "Type level programming helper for Vuex",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts"
+  ],
+  "scripts": {},
+  "keywords": [
+    "Vue.js",
+    "Vuex",
+    "TypeScript",
+    "type safe"
+  ],
+  "author": "katashin",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.4.2",
+    "vuex": "^2.3.1"
+  }
+}
