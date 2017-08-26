@@ -10,6 +10,11 @@ const {
 
 mapState({ counter: 'count' })
 mapState(['count'])
+mapState({
+  counter (state, getters) {
+    return state.count + getters.half
+  }
+})
 
 mapGetters({ halfValue: 'half' })
 mapGetters(['half'])
