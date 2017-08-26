@@ -5,6 +5,7 @@
     "noEmit": true
   },
   "include": [
-    "**/*.ts"
+    "index.d.ts",
+    "test/**/*.ts"
   ]
 }
