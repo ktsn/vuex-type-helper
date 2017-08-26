@@ -1,9 +1,5 @@
 import { Store } from 'vuex'
-import { DefineGetters, DefineActions, DefineMutations, Dispatcher, Committer } from './'
-
-interface RootState {
-  foo: FooState
-}
+import { DefineGetters, DefineActions, DefineMutations, Dispatcher, Committer } from '../'
 
 interface FooState {
   value: number
@@ -54,7 +50,7 @@ const getters: DefineGetters<FooGetters, FooState> = {
   def: state => state.value
 }
 
-const actions: DefineActions<FooActions, FooState, any, FooMutations, BarActions> = {
+const actions: DefineActions<FooActions, FooState, FooGetters, FooMutations, BarActions> = {
   foo(ctx, payload) {
     ctx.state.value
 
@@ -71,10 +67,19 @@ const actions: DefineActions<FooActions, FooState, any, FooMutations, BarActions
     ctx.commit('hello', { world: '123' })
     ctx.commit({ type: 'hello', world: '123' })
 
+    ctx.dispatch('anything', 'value', { root: true })
+    ctx.dispatch({ type: 'anything' }, { root: true })
+
+    ctx.commit('anything', 'value', { root: true })
+    ctx.commit({ type: 'anything' }, { root: true })
+
     payload.bar
   },
 
   baz(ctx, payload) {
+    ctx.getters.abc
+    ctx.getters.def
+
     payload.qux
   }
 }
