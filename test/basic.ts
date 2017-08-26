@@ -68,7 +68,7 @@ const getters: DefineGetters<FooGetters, FooState, BarGetters> = {
   def: state => state.value
 }
 
-const actions: DefineActions<FooActions, FooState, FooGetters, FooMutations & BarMutations, BarActions> = {
+const actions: DefineActions<FooActions, FooState, FooMutations & BarMutations, FooGetters, BarActions> = {
   foo(ctx, payload) {
     ctx.state.value
 

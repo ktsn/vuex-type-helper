@@ -38,7 +38,7 @@ export type DefineGetters<Getters, State, ExtraGetters = {}> = {
   [K in keyof Getters]: (state: State, getters: Getters & ExtraGetters, rootState: any, rootGetters: any) => Getters[K]
 }
 
-export type DefineActions<Actions, State, Getters, Mutations, ExtraActions = {}> = {
+export type DefineActions<Actions, State, Mutations, Getters = {}, ExtraActions = {}> = {
   [K in keyof Actions]: (ctx: ActionContext<State, Getters, Actions & ExtraActions, Mutations>, payload: Actions[K]) => void | Promise<any>
 }
 
