@@ -16,7 +16,7 @@ $ yarn add vuex-type-helper
 
 ```ts
 import * as Vuex from 'vuex'
-import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from '../'
+import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from 'vuex-type-helper'
 
 /**
  * Declare module types
