@@ -54,7 +54,7 @@ const actions: DefineActions<CounterActions, CounterState, CounterMutations, Cou
 }
 
 /**
- * Create a store as same as the ordinal way
+ * Create a store as same as the ordinary way
  */
 const store = new Vuex.Store({
   state,
