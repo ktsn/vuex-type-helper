@@ -2,6 +2,8 @@ import {
   ActionContext as BaseActionContext
 } from 'vuex'
 
+import './helpers'
+
 interface BasePayload {
   type: string
 }
