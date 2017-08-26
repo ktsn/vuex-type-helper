@@ -1,7 +1,7 @@
 {
-  "name": "type-level-vuex",
+  "name": "vuex-type-helper",
   "version": "1.0.0",
-  "description": "Type level programming helper for Vuex",
+  "description": "Type level helper to ensure type safety in Vuex",
   "types": "index.d.ts",
   "files": [
     "index.d.ts"
@@ -11,7 +11,8 @@
     "Vue.js",
     "Vuex",
     "TypeScript",
-    "type safe"
+    "type safe",
+    "helper"
   ],
   "author": "katashin",
   "license": "MIT",
