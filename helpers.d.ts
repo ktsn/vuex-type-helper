@@ -1,4 +1,4 @@
-import Vue = require('vue')
+import Vue from 'vue'
 import 'vuex'
 
 declare module 'vuex/types/helpers' {
