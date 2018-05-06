@@ -40,7 +40,7 @@ export interface CounterMutations {
 export interface CounterActions {
   // actionName: actionPayloadType
   incAsync: {
-    amount: number
+    amount: number,
     delay: number
   }
 }
