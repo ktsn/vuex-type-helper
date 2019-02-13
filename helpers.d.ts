@@ -2,7 +2,11 @@ import Vue from 'vue'
 import 'vuex'
 
 type Accessor<T, State, Getters> = {
-  [K in keyof T]: <V extends Vue>(this: V, state: State, getters: Getters) => T[K]
+  [K in keyof T]: <V extends Vue>(
+    this: V,
+    state: State,
+    getters: Getters
+  ) => T[K]
 } & {
   [key: string]: <V extends Vue>(this: V, state: State, getters: Getters) => any
 }
@@ -32,7 +36,6 @@ interface StrictNamespacedMappers<State, Getters, Mutations, Actions> {
   mapActions: MethodsMapper<Actions, Promise<any>>
 }
 
-
 declare module 'vuex/types/helpers' {
   interface Mapper<R> {
     <K extends string>(map: K[]): Record<K, R>
@@ -45,7 +48,9 @@ declare module 'vuex/types/helpers' {
   }
 
   interface FunctionMapper<F, R> {
-    <K extends string>(map: Record<K, (this: Vue, fn: F, ...args: any[]) => any>): Record<K, R>
+    <K extends string>(
+      map: Record<K, (this: Vue, fn: F, ...args: any[]) => any>
+    ): Record<K, R>
   }
 
   interface FunctionMapperWithNamespace<F, R> {
@@ -69,5 +74,7 @@ declare module 'vuex/types/helpers' {
   }
 
   export function createNamespacedHelpers(namespace: string): NamespacedMappers
-  export function createNamespacedHelpers<State, Getters, Mutations, Actions>(namespace: string): StrictNamespacedMappers<State, Getters, Mutations, Actions>
+  export function createNamespacedHelpers<State, Getters, Mutations, Actions>(
+    namespace: string
+  ): StrictNamespacedMappers<State, Getters, Mutations, Actions>
 }

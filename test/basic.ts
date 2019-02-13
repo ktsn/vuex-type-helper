@@ -1,5 +1,11 @@
 import { Store } from 'vuex'
-import { DefineGetters, DefineActions, DefineMutations, Dispatcher, Committer } from '../'
+import {
+  DefineGetters,
+  DefineActions,
+  DefineMutations,
+  Dispatcher,
+  Committer
+} from '../'
 
 /**
  * External getters/actions/mutations
@@ -57,7 +63,7 @@ const state: FooState = {
 }
 
 const getters: DefineGetters<FooGetters, FooState, BarGetters> = {
-  abc (state, getters) {
+  abc(state, getters) {
     state.value
     getters.abc
     getters.def
@@ -68,7 +74,13 @@ const getters: DefineGetters<FooGetters, FooState, BarGetters> = {
   def: state => state.value
 }
 
-const actions: DefineActions<FooActions, FooState, FooMutations & BarMutations, FooGetters, BarActions> = {
+const actions: DefineActions<
+  FooActions,
+  FooState,
+  FooMutations & BarMutations,
+  FooGetters,
+  BarActions
+> = {
   foo(ctx, payload) {
     ctx.state.value
 

@@ -1,17 +1,27 @@
 import { createNamespacedHelpers } from 'vuex'
-import { CounterState, CounterGetters, CounterMutations, CounterActions } from './counter'
+import {
+  CounterState,
+  CounterGetters,
+  CounterMutations,
+  CounterActions
+} from './counter'
 
 const {
   mapState,
   mapGetters,
   mapMutations,
   mapActions
-} = createNamespacedHelpers<CounterState, CounterGetters, CounterMutations, CounterActions>('counter')
+} = createNamespacedHelpers<
+  CounterState,
+  CounterGetters,
+  CounterMutations,
+  CounterActions
+>('counter')
 
 mapState({ counter: 'count' })
 mapState(['count'])
 mapState({
-  counter (state, getters) {
+  counter(state, getters) {
     return state.count + getters.half
   }
 })

@@ -1,6 +1,4 @@
-import {
-  ActionContext as BaseActionContext
-} from 'vuex'
+import { ActionContext as BaseActionContext } from 'vuex'
 
 import './helpers'
 
@@ -30,28 +28,49 @@ interface Commit<P> {
   <P extends BasePayload>(payloadWithType: P, options: RootOption): void
 }
 
-interface ActionContext<State, Getters, Actions, Mutations> extends BaseActionContext<State, any> {
+interface ActionContext<State, Getters, Actions, Mutations>
+  extends BaseActionContext<State, any> {
   getters: Getters
   dispatch: Dispatch<Actions>
   commit: Commit<Mutations>
 }
 
 export type DefineGetters<Getters, State, ExtraGetters = {}> = {
-  [K in keyof Getters]: (state: State, getters: Getters & ExtraGetters, rootState: any, rootGetters: any) => Getters[K]
+  [K in keyof Getters]: (
+    state: State,
+    getters: Getters & ExtraGetters,
+    rootState: any,
+    rootGetters: any
+  ) => Getters[K]
 }
 
-export type DefineActions<Actions, State, Mutations, Getters = {}, ExtraActions = {}> = {
-  [K in keyof Actions]: (ctx: ActionContext<State, Getters, Actions & ExtraActions, Mutations>, payload: Actions[K]) => void | Promise<any>
+export type DefineActions<
+  Actions,
+  State,
+  Mutations,
+  Getters = {},
+  ExtraActions = {}
+> = {
+  [K in keyof Actions]: (
+    ctx: ActionContext<State, Getters, Actions & ExtraActions, Mutations>,
+    payload: Actions[K]
+  ) => void | Promise<any>
 }
 
 export type DefineMutations<Mutations, State> = {
   [K in keyof Mutations]: (state: State, payload: Mutations[K]) => void
 }
 
-type Mapper<P> = {
-  [K in keyof P]: { type: K } & P[K]
-}
+type Mapper<P> = { [K in keyof P]: { type: K } & P[K] }
 
-export type Dispatcher<Actions, M extends Mapper<Actions> = Mapper<Actions>, K extends keyof M = keyof M> = M[K]
+export type Dispatcher<
+  Actions,
+  M extends Mapper<Actions> = Mapper<Actions>,
+  K extends keyof M = keyof M
+> = M[K]
 
-export type Committer<Mutations, M extends Mapper<Mutations> = Mapper<Mutations>, K extends keyof M = keyof M> = M[K]
+export type Committer<
+  Mutations,
+  M extends Mapper<Mutations> = Mapper<Mutations>,
+  K extends keyof M = keyof M
+> = M[K]

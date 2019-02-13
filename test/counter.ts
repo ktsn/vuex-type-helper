@@ -1,5 +1,11 @@
 import * as Vuex from 'vuex'
-import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from '../'
+import {
+  DefineGetters,
+  DefineMutations,
+  DefineActions,
+  Dispatcher,
+  Committer
+} from '../'
 
 /**
  * Declare module types
@@ -40,13 +46,18 @@ const getters: DefineGetters<CounterGetters, CounterState> = {
 }
 
 const mutations: DefineMutations<CounterMutations, CounterState> = {
-  inc (state, { amount }) {
+  inc(state, { amount }) {
     state.count += amount
   }
 }
 
-const actions: DefineActions<CounterActions, CounterState, CounterMutations, CounterGetters> = {
-  incAsync ({ commit }, payload) {
+const actions: DefineActions<
+  CounterActions,
+  CounterState,
+  CounterMutations,
+  CounterGetters
+> = {
+  incAsync({ commit }, payload) {
     setTimeout(() => {
       commit('inc', payload)
     }, payload.delay)
