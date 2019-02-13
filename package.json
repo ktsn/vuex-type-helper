@@ -1,6 +1,6 @@
 {
   "name": "vuex-type-helper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Type level helper to ensure type safety in Vuex",
   "types": "index.d.ts",
   "files": [
