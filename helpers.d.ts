@@ -8,7 +8,9 @@ type Accessor<T, State, Getters> = {
 }
 
 interface ComputedMapper<T> {
-  <Key extends keyof T, Map extends Record<string, Key>>(map: Map): { [K in keyof Map]: () => T[Map[K]] }
+  <Key extends keyof T, Map extends Record<string, Key>>(map: Map): {
+    [K in keyof Map]: () => T[Map[K] & Key]
+  }
   <Key extends keyof T>(map: Key[]): { [K in Key]: () => T[K] }
 }
 
@@ -17,7 +19,9 @@ interface ComputedStateMapper<State, Getters> {
 }
 
 interface MethodsMapper<T, R> {
-  <Key extends keyof T, Map extends Record<string, Key>>(map: Map): { [K in keyof Map]: (payload: T[Map[K]]) => R }
+  <Key extends keyof T, Map extends Record<string, Key>>(map: Map): {
+    [K in keyof Map]: (payload: T[Map[K] & Key]) => R
+  }
   <Key extends keyof T>(map: Key[]): { [K in Key]: (payload: T[K]) => R }
 }
 

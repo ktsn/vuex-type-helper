@@ -20,7 +20,7 @@
   "author": "katashin",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^2.7.2",
+    "typescript": "^3.3.3",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   }
