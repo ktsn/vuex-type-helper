@@ -1,4 +1,4 @@
-import { ActionContext as BaseActionContext } from 'vuex'
+import { ActionContext as BaseActionContext, Store } from 'vuex'
 
 import './helpers'
 
@@ -52,6 +52,7 @@ export type DefineActions<
   ExtraActions = {}
 > = {
   [K in keyof Actions]: (
+    this: Store<State>,
     ctx: ActionContext<State, Getters, Actions & ExtraActions, Mutations>,
     payload: Actions[K]
   ) => void | Promise<any>
