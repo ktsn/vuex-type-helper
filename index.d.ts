@@ -11,10 +11,11 @@ interface RootOption {
 }
 
 type PayloadArgs<T> = T extends undefined ? [] : [T]
+type PayloadForWithType<T> = T extends undefined ? {} : T
 
 interface Dispatch<P> {
   <K extends keyof P>(type: K, ...payloadArgs: PayloadArgs<P[K]>): Promise<any>
-  <K extends keyof P>(payloadWithType: { type: K } & P[K]): Promise<any>
+  <K extends keyof P>(payloadWithType: { type: K } & PayloadForWithType<P[K]>): Promise<any>
 
   // Fallback for root actions
   (type: string, payload: any, options: RootOption): Promise<any>
@@ -23,7 +24,7 @@ interface Dispatch<P> {
 
 interface Commit<P> {
   <K extends keyof P>(type: K, ...payloadArgs: PayloadArgs<P[K]>): void
-  <K extends keyof P>(payloadWithType: { type: K } & P[K]): void
+  <K extends keyof P>(payloadWithType: { type: K } & PayloadForWithType<P[K]>): void
 
   // Fallback for root mutations
   (type: string, payload: any, options: RootOption): void
@@ -64,7 +65,7 @@ export type DefineMutations<Mutations, State> = {
   [K in keyof Mutations]: (state: State, payload: Mutations[K]) => void
 }
 
-type Mapper<P> = { [K in keyof P]: { type: K } & P[K] }
+type Mapper<P> = { [K in keyof P]: { type: K } & PayloadForWithType<P[K]> }
 
 export type Dispatcher<
   Actions,
