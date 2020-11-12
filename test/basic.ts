@@ -44,6 +44,7 @@ interface FooActions {
   baz: {
     qux: number
   }
+  actionWithoutPayload: undefined
 }
 
 interface FooMutations {
@@ -53,6 +54,7 @@ interface FooMutations {
   hello: {
     world: string
   }
+  mutationWithoutPayload: undefined
 }
 
 /**
@@ -89,6 +91,8 @@ const actions: DefineActions<
     ctx.dispatch({ type: 'foo', bar: 1 })
     ctx.dispatch('baz', { qux: 1 })
     ctx.dispatch({ type: 'baz', qux: 1 })
+    ctx.dispatch('actionWithoutPayload')
+    ctx.dispatch({ type: 'actionWithoutPayload' })
 
     // dispatch outer actions
     ctx.dispatch('test', 'value')
@@ -99,6 +103,8 @@ const actions: DefineActions<
     ctx.commit({ type: 'test', value: '123' })
     ctx.commit('hello', { world: '123' })
     ctx.commit({ type: 'hello', world: '123' })
+    ctx.commit('mutationWithoutPayload')
+    ctx.commit({ type: 'mutationWithoutPayload' })
 
     // commit outer mutations
     ctx.commit('inc', 123)
@@ -119,6 +125,10 @@ const actions: DefineActions<
     ctx.getters.def
 
     payload.qux
+  },
+
+  actionWithoutPayload(ctx) {
+    ctx.state.value
   }
 }
 
@@ -131,6 +141,10 @@ const mutations: DefineMutations<FooMutations, FooState> = {
 
   hello(state, payload) {
     payload.world
+  },
+
+  mutationWithoutPayload(state) {
+    state.value
   }
 }
 
@@ -152,7 +166,15 @@ store.dispatch<Dispatcher<FooActions>>({
   bar: 123
 })
 
+store.dispatch<Dispatcher<FooActions>>({
+  type: 'actionWithoutPayload'
+})
+
 store.commit<Committer<FooMutations>>({
   type: 'test',
   value: ''
+})
+
+store.commit<Committer<FooMutations>>({
+  type: 'mutationWithoutPayload',
 })
