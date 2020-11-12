@@ -10,8 +10,10 @@ interface RootOption {
   root: true
 }
 
+type PayloadArgs<T> = T extends undefined ? [] : [T]
+
 interface Dispatch<P> {
-  <K extends keyof P>(type: K, payload: P[K]): Promise<any>
+  <K extends keyof P>(type: K, ...payloadArgs: PayloadArgs<P[K]>): Promise<any>
   <K extends keyof P>(payloadWithType: { type: K } & P[K]): Promise<any>
 
   // Fallback for root actions
@@ -20,7 +22,7 @@ interface Dispatch<P> {
 }
 
 interface Commit<P> {
-  <K extends keyof P>(type: K, payload: P[K]): void
+  <K extends keyof P>(type: K, ...payloadArgs: PayloadArgs<P[K]>): void
   <K extends keyof P>(payloadWithType: { type: K } & P[K]): void
 
   // Fallback for root mutations
