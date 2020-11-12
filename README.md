@@ -35,6 +35,7 @@ export interface CounterMutations {
   inc: {
     amount: number
   }
+  reset: undefined // having no payload
 }
 
 export interface CounterActions {
@@ -43,6 +44,7 @@ export interface CounterActions {
     amount: number
     delay: number
   }
+  reset: undefined // having no payload
 }
 
 /**
@@ -59,6 +61,10 @@ const getters: DefineGetters<CounterGetters, CounterState> = {
 const mutations: DefineMutations<CounterMutations, CounterState> = {
   inc (state, { amount }) {
     state.count += amount
+  },
+
+  reset(state) {
+    state.count = 0
   }
 }
 
@@ -67,6 +73,10 @@ const actions: DefineActions<CounterActions, CounterState, CounterMutations, Cou
     setTimeout(() => {
       commit('inc', payload)
     }, payload.delay)
+  },
+
+  reset({ commit }) {
+    commit('reset')
   }
 }
 
@@ -89,9 +99,17 @@ store.dispatch<Dispatcher<CounterActions>>({
   delay: 1000
 })
 
+store.dispatch<Dispatcher<CounterActions>>({
+  type: 'reset'
+})
+
 store.commit<Committer<CounterMutations>>({
   type: 'inc',
   amount: 1
+})
+
+store.commit<Committer<CounterMutations>>({
+  type: 'reset'
 })
 ```
 
