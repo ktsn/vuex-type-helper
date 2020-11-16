@@ -35,7 +35,7 @@ export interface CounterMutations {
   inc: {
     amount: number
   }
-  reset: undefined // having no payload
+  reset: void // having no payload
 }
 
 export interface CounterActions {
@@ -44,7 +44,7 @@ export interface CounterActions {
     amount: number
     delay: number
   }
-  reset: undefined // having no payload
+  reset: void // having no payload
 }
 
 /**

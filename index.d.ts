@@ -10,8 +10,8 @@ interface RootOption {
   root: true
 }
 
-type PayloadArgs<T> = T extends undefined ? [] : [T]
-type PayloadForWithType<T> = T extends undefined ? {} : T
+type PayloadArgs<T> = T extends void ? [] : [T]
+type PayloadForWithType<T> = T extends void ? {} : T
 
 interface Dispatch<P> {
   <K extends keyof P>(type: K, ...payloadArgs: PayloadArgs<P[K]>): Promise<any>
