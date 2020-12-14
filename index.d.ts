@@ -10,7 +10,7 @@ interface RootOption {
   root: true
 }
 
-type PayloadArgs<T> = T extends void ? [] : [T]
+type PayloadArgs<T> = [T] extends [void] ? [] : [T]
 type PayloadForWithType<T> = T extends void ? {} : T
 
 interface Dispatch<P> {
