@@ -44,6 +44,7 @@ interface FooActions {
   baz: {
     qux: number
   }
+  actionWithUnionPayload: 'active' | 'inactive'
   actionWithoutPayload: undefined
 }
 
@@ -54,6 +55,7 @@ interface FooMutations {
   hello: {
     world: string
   }
+  mutationWithUnionPayload: 'active' | 'inactive'
   mutationWithoutPayload: undefined
 }
 
@@ -91,6 +93,13 @@ const actions: DefineActions<
     ctx.dispatch({ type: 'foo', bar: 1 })
     ctx.dispatch('baz', { qux: 1 })
     ctx.dispatch({ type: 'baz', qux: 1 })
+
+    const getStatus = (): 'active' | 'inactive' => {
+      const statusArray = ['active', 'inactive'] as ['active', 'inactive']
+      return statusArray[Math.floor(Math.random() * statusArray.length)]
+    }
+    ctx.dispatch('actionWithUnionPayload', getStatus())
+
     ctx.dispatch('actionWithoutPayload')
     ctx.dispatch({ type: 'actionWithoutPayload' })
 
@@ -103,6 +112,7 @@ const actions: DefineActions<
     ctx.commit({ type: 'test', value: '123' })
     ctx.commit('hello', { world: '123' })
     ctx.commit({ type: 'hello', world: '123' })
+    ctx.commit('mutationWithUnionPayload', getStatus())
     ctx.commit('mutationWithoutPayload')
     ctx.commit({ type: 'mutationWithoutPayload' })
 
@@ -127,6 +137,10 @@ const actions: DefineActions<
     payload.qux
   },
 
+  actionWithUnionPayload(ctx, payload) {
+    ctx.commit('mutationWithUnionPayload', payload)
+  },
+
   actionWithoutPayload(ctx) {
     ctx.state.value
   }
@@ -141,6 +155,10 @@ const mutations: DefineMutations<FooMutations, FooState> = {
 
   hello(state, payload) {
     payload.world
+  },
+
+  mutationWithUnionPayload(state, payload) {
+    payload
   },
 
   mutationWithoutPayload(state) {
