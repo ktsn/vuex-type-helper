@@ -45,7 +45,7 @@ interface FooActions {
     qux: number
   }
   actionWithUnionPayload: 'active' | 'inactive'
-  actionWithoutPayload: undefined
+  actionWithoutPayload: void
 }
 
 interface FooMutations {
@@ -56,7 +56,7 @@ interface FooMutations {
     world: string
   }
   mutationWithUnionPayload: 'active' | 'inactive'
-  mutationWithoutPayload: undefined
+  mutationWithoutPayload: void
 }
 
 /**
